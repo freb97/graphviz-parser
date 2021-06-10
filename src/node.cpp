@@ -1,4 +1,3 @@
-#include <string>
 #include <vector>
 #include <sstream>
 
@@ -6,25 +5,38 @@
 
 node::node(const std::string& name, const std::vector<float>& value)
 {
-    this->name = name;
-    this->value = value;
+    this->name_ = name;
+    this->value_ = value;
+}
+
+node::node(const std::string& name, const std::vector<float>& value, const std::string& shape)
+{
+    this->name_ = name;
+    this->value_ = value;
+    this->shape_ = shape;
 }
 
 std::string node::toString()
 {
     std::stringstream stream;
 
-    stream << this->name << " [pos=\"";
+    stream << this->name_ << " [pos=\"";
 
-    for (int i = 0; i < this->value.size(); i++) {
-        stream << this->value[i];
+    for (int i = 0; i < this->value_.size(); i++) {
+        stream << this->value_[i];
 
-        if (i != this->value.size() - 1) {
+        if (i != this->value_.size() - 1) {
             stream << ",";
         }
     }
 
-    stream << "!\"]";
+    stream << "!\"";
+
+    if (!this->shape_.empty()) {
+        stream << ",shape=" << this->shape_;
+    }
+
+    stream << "]";
 
     return stream.str();
 }
