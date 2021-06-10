@@ -23,7 +23,7 @@ std::string graph::toString() const {
     stream << "graph {" << std::endl;
 
     for (node n : this->nodes_) {
-        stream << n.toString() << std::endl;
+        stream << "  " << n.toString() << std::endl;
     }
 
     stream << "}";
