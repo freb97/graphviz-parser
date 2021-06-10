@@ -40,7 +40,7 @@ H LL 1 0<br>
 L TO 1 1<br>
 H LP 0 2
 
-This wuill output the following graphviz data:
+This will output the following graphviz data:
 
 graph {<br>
 &nbsp;&nbsp;LL [pos="1,0!",shape=box]<br>
