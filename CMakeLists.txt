@@ -8,4 +8,6 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/build)
 
 add_executable(graphs
         main.cpp
+        src/node.cpp
+        src/node.hpp
         )
