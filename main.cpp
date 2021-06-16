@@ -93,7 +93,10 @@ int main()
 
     // Output the adjacency matrix
     std::string adjacencyMatrix = graph.getAdjacencyMatrix();
-    std::cout << adjacencyMatrix << std::endl;
+    std::string edgeList = graph.getEdgeList();
+
+    std::cout << adjacencyMatrix << std::endl << std::endl;
+    std::cout << edgeList << std::endl << std::endl;
 
     return EXIT_SUCCESS;
 }

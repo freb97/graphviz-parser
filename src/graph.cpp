@@ -111,10 +111,38 @@ std::string Graph::getAdjacencyMatrix()
             output << adjacency_matrix_[i][ii];
 
             if (ii == size - 1) {
-                output << "\n";
+                output << std::endl;
             }
             else {
                 output << "\t";
+            }
+        }
+    }
+
+    return output.str();
+}
+
+/**
+ * Gets a representation of the adjacency matrix as an edge list.
+ *
+ * @return The edge list as a string.
+ */
+std::string Graph::getEdgeList()
+{
+    std::stringstream output;
+
+    int size = adjacency_matrix_.size();
+
+    for (int i = 0; i < size; i++) {
+        for (int ii = i; ii < size; ii++) {
+            float value = adjacency_matrix_[i][ii];
+
+            if (value > 0 && value < std::numeric_limits<float>::infinity()) {
+                output << "[" << i + 1 << "] [" << ii + 1 << "]";
+
+                if (i != size - 1) {
+                    output << std::endl;
+                }
             }
         }
     }
