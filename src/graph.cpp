@@ -7,7 +7,8 @@
 /**
  * Class constructor.
  */
-Graph::Graph() {
+Graph::Graph()
+{
     initializeAdjacencyMatrix();
 }
 
@@ -16,15 +17,62 @@ Graph::Graph() {
  *
  * @param node The node to add.
  */
-void Graph::addNode(const Node& node) {
+void Graph::addNode(const Node& node)
+{
     this->nodes_.push_back(node);
 }
 
 /**
  * Connects two nodes in the adjacency matrix.
+ *
+ * @param indexA The index of the first node.
+ * @param indexB The index of the second node.
  */
-void Graph::connect(const Node& nodeA, const Node& nodeB) {
+void Graph::connect(int indexA, int indexB)
+{
+    if (checkNodeIndex(indexA) && checkNodeIndex(indexB)) {
+        adjacency_matrix_[indexA][indexB] = 1;
+        adjacency_matrix_[indexB][indexA] = 1;
+    }
+}
 
+/**
+ * Checks if two nodes are connected in the adjacency matrix.
+ *
+ * @param indexA The index of the first node.
+ * @param indexB The index of the second node.
+ *
+ * @return True if the nodes are connected, false if not.
+ */
+bool Graph::areConnected(int indexA, int indexB)
+{
+    if (checkNodeIndex(indexA) && checkNodeIndex(indexB)) {
+        std::vector<float> nodeValueA = this->nodes_[indexA].getValue();
+        std::vector<float> nodeValueB = this->nodes_[indexB].getValue();
+
+        return adjacency_matrix_[indexA][indexB] == 1 &&
+               adjacency_matrix_[indexB][indexA] == 1;
+    }
+
+    return false;
+}
+
+/**
+ * Gets a nodes' index in the local nodes array.
+ *
+ * @param node The node to search for.
+ *
+ * @return The nodes' index or -1 if not found.
+ */
+int Graph::getNodeIndex(const Node& node)
+{
+    for (int i = 0; i < this->nodes_.size(); i++) {
+        if (this->nodes_[i] == node) {
+            return i;
+        }
+    }
+
+    return -1;
 }
 
 /**
@@ -32,24 +80,25 @@ void Graph::connect(const Node& nodeA, const Node& nodeB) {
  *
  * @return The graph output as string data.
  */
-std::string Graph::toString() const {
-    std::stringstream stream;
+std::string Graph::toString() const
+{
+    std::stringstream output;
 
-    stream << "graph {" << std::endl;
+    output << "graph {" << std::endl;
 
     for (Node node : this->nodes_) {
-        stream << "  " << node.toString() << std::endl;
+        output << "  " << node.toString() << std::endl;
     }
 
-    stream << "}";
+    output << "}";
 
-    return stream.str();
+    return output.str();
 }
 
 /**
- * Gets the adjacency matrix values as a string stream.
+ * Gets the adjacency matrix values as a string.
  *
- * @return The adjacency matrix values.
+ * @return The adjacency matrix values as string.
  */
 std::string Graph::getAdjacencyMatrix()
 {
@@ -65,7 +114,7 @@ std::string Graph::getAdjacencyMatrix()
                 output << "\n";
             }
             else {
-                output << " ";
+                output << "\t";
             }
         }
     }
@@ -76,8 +125,9 @@ std::string Graph::getAdjacencyMatrix()
 /**
  * Initializes the adjacency matrix.
  */
-void Graph::initializeAdjacencyMatrix() {
-    int matrixSize = 5;
+void Graph::initializeAdjacencyMatrix()
+{
+    int matrixSize = 4;
     float matrixValue = std::numeric_limits<float>::infinity();
 
     for (int i = 0; i < matrixSize; i++) {
@@ -92,18 +142,13 @@ void Graph::initializeAdjacencyMatrix() {
 }
 
 /**
- * Searches for a nodes' index in the local nodes array.
+ * Checks if a value exists at a given index in the local nodes array.
  *
- * @param node The node to search for.
+ * @param index The index to check.
  *
- * @return The nodes' index or -1 if not found.
+ * @return True if a value exists at the index, false if its out of array bounds.
  */
-int Graph::findNodeIndex(const Node& node) {
-    for (int i = 0; i < this->nodes_.size(); i++) {
-        if (this->nodes_[i] == node) {
-            return i;
-        }
-    }
-
-    return -1;
+bool Graph::checkNodeIndex(int index)
+{
+    return index >= 0 && index < this->nodes_.size();
 }

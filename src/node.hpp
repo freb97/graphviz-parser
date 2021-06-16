@@ -6,8 +6,8 @@
 
 class Node {
     public:
-        Node(const std::string &name, const std::vector<float>&);
-        Node(const std::string &name, const std::vector<float>& value, const std::string &shape);
+        Node(const std::string& name, float x, float y);
+        Node(const std::string& name, const std::string& shape, float x, float y);
         std::string toString();
         std::string getName();
         std::vector<float> getValue();

@@ -10,7 +10,9 @@ class Graph {
     public:
         Graph();
         void addNode(const Node& node);
-        void connect(const Node& nodeA, const Node& nodeB);
+        void connect(int indexA, int indexB);
+        bool areConnected(int indexA, int indexB);
+        int getNodeIndex(const Node& node);
         std::string toString() const;
         std::string getAdjacencyMatrix();
 
@@ -19,7 +21,7 @@ class Graph {
         std::vector<std::vector<float>> adjacency_matrix_;
 
         void initializeAdjacencyMatrix();
-        int findNodeIndex(const Node& node);
+        bool checkNodeIndex(int index);
 };
 
 #endif //GRAPHS_GRAPH_HPP

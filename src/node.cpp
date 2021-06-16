@@ -7,11 +7,17 @@
  * Class constructor.
  *
  * @param name The name of the node.
- * @param value The vector value of the node.
+ * @param x The x position of the node.
+ * @param y The y position of the node.
  */
-Node::Node(const std::string& name, const std::vector<float>& value)
+Node::Node(const std::string& name, float x, float y)
 {
     this->name_ = name;
+
+    std::vector<float> value;
+    value.push_back(x);
+    value.push_back(y);
+
     this->value_ = value;
 }
 
@@ -19,14 +25,20 @@ Node::Node(const std::string& name, const std::vector<float>& value)
  * Class constructor.
  *
  * @param name The name of the node.
- * @param value The vector value of the node.
  * @param shape The shape of the node in a graph.
+ * @param x The x position of the node.
+ * @param y The y position of the node.
  */
-Node::Node(const std::string& name, const std::vector<float>& value, const std::string& shape)
+Node::Node(const std::string& name, const std::string& shape, float x, float y)
 {
     this->name_ = name;
-    this->value_ = value;
     this->shape_ = shape;
+
+    std::vector<float> value;
+    value.push_back(x);
+    value.push_back(y);
+
+    this->value_ = value;
 }
 
 /**
@@ -64,7 +76,8 @@ std::string Node::toString()
  *
  * @return The nodes' name.
  */
-std::string Node::getName() {
+std::string Node::getName()
+{
     return this->name_;
 }
 
@@ -73,7 +86,8 @@ std::string Node::getName() {
  *
  * @return The nodes' value.
  */
-std::vector<float> Node::getValue() {
+std::vector<float> Node::getValue()
+{
     return this->value_;
 }
 
@@ -82,7 +96,8 @@ std::vector<float> Node::getValue() {
  *
  * @return The nodes' shape.
  */
-std::string Node::getShape() {
+std::string Node::getShape()
+{
     return this->shape_;
 }
 
