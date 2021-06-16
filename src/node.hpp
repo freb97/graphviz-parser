@@ -4,11 +4,17 @@
 #include <vector>
 #include <sstream>
 
-class node {
+class Node {
     public:
-        node(const std::string &name, const std::vector<float>&);
-        node(const std::string &name, const std::vector<float> &value, const std::string &shape);
+        Node(const std::string &name, const std::vector<float>&);
+        Node(const std::string &name, const std::vector<float>& value, const std::string &shape);
         std::string toString();
+        std::string getName();
+        std::vector<float> getValue();
+        std::string getShape();
+
+        friend bool operator ==(Node nodeA, Node nodeB);
+        friend bool operator !=(Node nodeA, Node nodeB);
 
     private:
         std::string name_;

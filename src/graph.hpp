@@ -6,13 +6,20 @@
 
 #include "node.hpp"
 
-class graph {
+class Graph {
     public:
-        void addNode(const node& node);
+        Graph();
+        void addNode(const Node& node);
+        void connect(const Node& nodeA, const Node& nodeB);
         std::string toString() const;
+        std::string getAdjacencyMatrix();
 
     private:
-        std::vector<node> nodes_;
+        std::vector<Node> nodes_;
+        std::vector<std::vector<float>> adjacency_matrix_;
+
+        void initializeAdjacencyMatrix();
+        int findNodeIndex(const Node& node);
 };
 
 #endif //GRAPHS_GRAPH_HPP
