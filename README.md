@@ -47,3 +47,28 @@ graph {<br>
 &nbsp;&nbsp;TO [pos="1,1!",shape=circle]<br>
 &nbsp;&nbsp;LP [pos="0,2!",shape=box]<br>
 }
+
+To add connections between nodes, append the input with the
+edge connection indicator "E" and list the names of nodes
+to connect.
+
+Example:
+
+3<br>
+H LL 1 0<br>
+L TO 1 1<br>
+H LP 0 2<br>
+E<br>
+0 1<br>
+2 0
+
+This will output the following graphviz data:
+
+graph {<br>
+&nbsp;&nbsp;LL [pos="1,0!",shape=box]<br>
+&nbsp;&nbsp;TO [pos="1,1!",shape=circle]<br>
+&nbsp;&nbsp;LP [pos="0,2!",shape=box]<br>
+&nbsp;&nbsp;LL -- TO<br>
+&nbsp;&nbsp;LL -- LP<br>
+}
+
