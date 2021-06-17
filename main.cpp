@@ -1,55 +1,99 @@
 #include <array>
-#include <iostream>
 #include <cassert>
+#include <iostream>
+#include <sstream>
 
 #include "src/node.hpp"
 #include "src/graph.hpp"
 
+Graph parseInput()
+{
+    Graph* graph;
+
+    std::stringstream output;
+    std::string line;
+
+    bool inputParsed = false;
+    bool edgeInputMode = false;
+
+    while (!inputParsed) {
+        getline(std::cin, line);
+
+        if (line.length() == 0) {
+            inputParsed = true;
+        }
+
+        if (line.length() < 3) {
+            if (std::isdigit(line[0]) == 1) {
+                int size = std::stoi(line);
+                graph = new Graph(size);
+            }
+            else if (line == "E") {
+                edgeInputMode = true;
+            }
+        }
+        else if (line.length() >= 3) {
+            if (!edgeInputMode && line.length() >= 7) {
+                std::string name = line.substr(2, 2);
+                std::string shape = line.substr(0, 1) == "H" ? "box" : "circle";
+                float x = std::stoi(line.substr(5, 1));
+                float y = std::stoi(line.substr(7, 1));
+
+                Node* node = new Node(name, shape, x, y);
+                graph->addNode(*node);
+            }
+            else {
+                int nodeIndexA = std::stoi(line.substr(0, 1));
+                int nodeIndexB = -1;
+
+                if (line.length() == 3) {
+                    nodeIndexB = std::stoi(line.substr(2, 1));
+                }
+                else if (line.length() == 4) {
+                    nodeIndexB = std::stoi(line.substr(2, 2));
+                }
+
+                if (nodeIndexB != -1) {
+                    graph->connect(nodeIndexA, nodeIndexB);
+                }
+                else {
+                    std::cout << "Error while parsing node connection at: " << line << std::endl;
+                }
+            }
+        }
+    }
+
+    return *graph;
+}
+
 /**
  * Main function.
  *
+ * @param argc The argument count.
+ * @param argv The argument values.
+ *
  * @return The exit state of the program.
  */
-int main()
+int main(int argc, char** argv)
 {
-    Graph graph = Graph();
+    Graph graph = parseInput();
 
-    // Create nodes
-    Node* nodeA = new Node("XF", "circle", 0, 0);
-    Node* nodeB = new Node("ZF", "box", 0, 0);
-    Node* nodeC = new Node("XB", "circle", 2, 0);
-    Node* nodeD = new Node("KL", "box", 0, 2);
+    if (argc >= 2) {
+        if (strcmp(argv[1], "-g") == 0) {
+            std::cout << graph.toString();
+        }
+        else if (strcmp(argv[1], "-a") == 0) {
+            std::cout << graph.getAdjacencyMatrix();
+        }
+        else if (strcmp(argv[1], "-e") == 0) {
+            std::cout << graph.getEdgeList();
+        }
+    }
+    else {
+        std::cout << graph.toString();
+    }
 
-    // Add nodes to graph
-    graph.addNode(*nodeA);
-    graph.addNode(*nodeB);
-    graph.addNode(*nodeC);
-    graph.addNode(*nodeD);
-
-    // Get node indexes in graph
-    int nodeIndexA = graph.getNodeIndex(*nodeA);
-    int nodeIndexB = graph.getNodeIndex(*nodeB);
-    int nodeIndexC = graph.getNodeIndex(*nodeC);
-    int nodeIndexD = graph.getNodeIndex(*nodeD);
-
-    // Connect nodes
-    graph.connect(nodeIndexA, nodeIndexB);
-    graph.connect(nodeIndexA, nodeIndexD);
-    graph.connect(nodeIndexC, nodeIndexD);
-
-    // Test node connection
-    assert(graph.areConnected(nodeIndexA, nodeIndexB));
-    assert(graph.areConnected(nodeIndexA, nodeIndexD));
-    assert(graph.areConnected(nodeIndexC, nodeIndexD));
-
-    // Output the adjacency matrix
-    std::string adjacencyMatrix = graph.getAdjacencyMatrix();
-    std::string edgeList = graph.getEdgeList();
-
-    std::cout << adjacencyMatrix << std::endl << std::endl;
-    std::cout << edgeList << std::endl << std::endl;
-
-    std::cout << graph.toString() << std::endl;
+    std::cout << std::endl;
 
     return EXIT_SUCCESS;
 }

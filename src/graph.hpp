@@ -8,7 +8,7 @@
 
 class Graph {
     public:
-        Graph();
+        Graph(int size);
         void addNode(const Node& node);
         void connect(int indexA, int indexB);
         bool areConnected(int indexA, int indexB);
@@ -21,7 +21,7 @@ class Graph {
         std::vector<Node> nodes_;
         std::vector<std::vector<float>> adjacency_matrix_;
 
-        void initializeAdjacencyMatrix();
+        void initializeAdjacencyMatrix(int size);
         bool checkNodeIndex(int index);
 };
 

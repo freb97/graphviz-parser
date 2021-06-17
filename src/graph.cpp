@@ -7,9 +7,9 @@
 /**
  * Class constructor.
  */
-Graph::Graph()
+Graph::Graph(int size)
 {
-    initializeAdjacencyMatrix();
+    initializeAdjacencyMatrix(size);
 }
 
 /**
@@ -124,13 +124,14 @@ std::string Graph::getAdjacencyMatrix()
 
     for (int i = 0; i < size; i++) {
         for (int ii = 0; ii < size; ii++) {
-            output << adjacency_matrix_[i][ii];
+            float value = adjacency_matrix_[i][ii] == 1 ? 1 : 0;
+            output << value;
 
             if (ii == size - 1) {
                 output << std::endl;
             }
             else {
-                output << "\t";
+                output << " ";
             }
         }
     }
@@ -169,15 +170,14 @@ std::string Graph::getEdgeList() const
 /**
  * Initializes the adjacency matrix.
  */
-void Graph::initializeAdjacencyMatrix()
+void Graph::initializeAdjacencyMatrix(int size)
 {
-    int matrixSize = 4;
     float matrixValue = std::numeric_limits<float>::infinity();
 
-    for (int i = 0; i < matrixSize; i++) {
+    for (int i = 0; i < size; i++) {
         std::vector<float> vector;
 
-        for (int ii = 0; ii < matrixSize; ii++) {
+        for (int ii = 0; ii < size; ii++) {
             vector.push_back(matrixValue);
         }
 
