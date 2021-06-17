@@ -90,6 +90,22 @@ std::string Graph::toString() const
         output << "  " << node.toString() << std::endl;
     }
 
+    int size = adjacency_matrix_.size();
+
+    for (int i = 0; i < size; i++) {
+        for (int ii = i; ii < size; ii++) {
+            float value = adjacency_matrix_[i][ii];
+
+            if (value > 0 && value < std::numeric_limits<float>::infinity()) {
+                output << "  " << this->nodes_[i].getName() << " -- " << this->nodes_[ii].getName();
+
+                if (i != size - 1) {
+                    output << std::endl;
+                }
+            }
+        }
+    }
+
     output << "}";
 
     return output.str();
@@ -127,7 +143,7 @@ std::string Graph::getAdjacencyMatrix()
  *
  * @return The edge list as a string.
  */
-std::string Graph::getEdgeList()
+std::string Graph::getEdgeList() const
 {
     std::stringstream output;
 
@@ -138,7 +154,7 @@ std::string Graph::getEdgeList()
             float value = adjacency_matrix_[i][ii];
 
             if (value > 0 && value < std::numeric_limits<float>::infinity()) {
-                output << "[" << i + 1 << "] [" << ii + 1 << "]";
+                output << "[" << i + 1 << "] -- [" << ii + 1 << "]";
 
                 if (i != size - 1) {
                     output << std::endl;

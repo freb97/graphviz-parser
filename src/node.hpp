@@ -9,7 +9,7 @@ class Node {
         Node(const std::string& name, float x, float y);
         Node(const std::string& name, const std::string& shape, float x, float y);
         std::string toString();
-        std::string getName();
+        std::string getName() const;
         std::vector<float> getValue();
         std::string getShape();
 

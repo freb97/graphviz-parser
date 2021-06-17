@@ -76,7 +76,7 @@ std::string Node::toString()
  *
  * @return The nodes' name.
  */
-std::string Node::getName()
+std::string Node::getName() const
 {
     return this->name_;
 }

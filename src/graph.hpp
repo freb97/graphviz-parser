@@ -15,7 +15,7 @@ class Graph {
         int getNodeIndex(const Node& node);
         std::string toString() const;
         std::string getAdjacencyMatrix();
-        std::string getEdgeList();
+        std::string getEdgeList() const;
 
     private:
         std::vector<Node> nodes_;
