@@ -24,6 +24,8 @@ Run the parser
 
 ## Usage
 
+### Nodes
+
 First, enter the number of nodes to add to a graph.
 For each node to add, specify the type:
 
@@ -47,6 +49,8 @@ graph {<br>
 &nbsp;&nbsp;TO [pos="1,1!",shape=circle]<br>
 &nbsp;&nbsp;LP [pos="0,2!",shape=box]<br>
 }
+
+### Edges
 
 To add connections between nodes, append the input with the
 edge connection indicator "E" and list the names of nodes
@@ -72,3 +76,10 @@ graph {<br>
 &nbsp;&nbsp;LL -- LP<br>
 }
 
+### Program arguments
+
+To output the graphviz data, call the executable with the argument "-g".
+This is the standard behaviour and doesn't have to be explicitly stated.
+
+To output the graphs' adjacency matrix, call the executable with the
+argument "-a" and to output the graphs' edge list use the argument "-e".
