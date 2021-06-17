@@ -1,8 +1,8 @@
 #ifndef GRAPHS_NODE_HPP
 #define GRAPHS_NODE_HPP
 
+#include <string>
 #include <vector>
-#include <sstream>
 
 class Node {
     public:

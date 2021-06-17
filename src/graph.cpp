@@ -1,4 +1,5 @@
 #include <array>
+#include <string>
 #include <sstream>
 
 #include "graph.hpp"
