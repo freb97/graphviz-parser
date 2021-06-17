@@ -6,6 +6,11 @@
 #include "src/node.hpp"
 #include "src/graph.hpp"
 
+/**
+ * Parses graph input, adds and connects nodes.
+ *
+ * @return The filled graph.
+ */
 Graph parseInput()
 {
     Graph* graph;
