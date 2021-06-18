@@ -12,4 +12,6 @@ add_executable(graphs
     src/node.hpp
     src/graph.cpp
     src/graph.hpp
+    src/dijkstra.cpp
+    src/dijkstra.hpp
 )

@@ -88,6 +88,9 @@ int main(int argc, char** argv)
         else if (strcmp(argv[1], "-e") == 0) {
             std::cout << graph.getEdgeList();
         }
+        else if (strcmp(argv[1], "-d") == 0) {
+            // @TODO: Implement dijkstra's algorithm and print output
+        }
     }
     else {
         std::cout << graph.toString();

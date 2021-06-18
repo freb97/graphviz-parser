@@ -83,3 +83,44 @@ This is the standard behaviour and doesn't have to be explicitly stated.
 
 To output the graphs' adjacency matrix, call the executable with the
 argument "-a" and to output the graphs' edge list use the argument "-e".
+
+#### Adjacency matrix output
+
+When given the argument -a, the program will output the
+adjacency matrix data of the graph.
+
+Example:
+
+3<br>
+H LL 1 0<br>
+L TO 1 1<br>
+H LP 0 2<br>
+E<br>
+0 1<br>
+2 0
+
+This will output the following data:
+
+0 1 1<br>
+1 0 0<br>
+1 0 0
+
+#### Edge list output
+
+When given the argument -e, the program will output the
+edge list data of the graph.
+
+Example:
+
+3<br>
+H LL 1 0<br>
+L TO 1 1<br>
+H LP 0 2<br>
+E<br>
+0 1<br>
+2 0
+
+This will output the following data:
+
+[1] -- [2]<br>
+[1] -- [3]

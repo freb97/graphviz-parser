@@ -13,6 +13,7 @@ class Graph {
         void connect(int indexA, int indexB);
         bool areConnected(int indexA, int indexB);
         int getNodeIndex(const Node& node);
+        const std::vector<Node>& getNodeList();
         std::string toString() const;
         std::string getAdjacencyMatrix();
         std::string getEdgeList() const;

@@ -77,6 +77,16 @@ int Graph::getNodeIndex(const Node& node)
 }
 
 /**
+ * Gets a list of all nodes in the graph.
+ *
+ * @return The list of all nodes.
+ */
+const std::vector<Node>& Graph::getNodeList()
+{
+    return this->nodes_;
+}
+
+/**
  * Converts the graph output to a string.
  *
  * @return The graph output as string data.
