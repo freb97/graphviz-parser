@@ -20,7 +20,7 @@ Build the executable(s)
 
 Run the parser
 
-`./build/graphs`
+`./build/graphviz_parser`
 
 ## Usage
 
@@ -80,9 +80,6 @@ graph {<br>
 
 To output the graphviz data, call the executable with the argument "-g".
 This is the standard behaviour and doesn't have to be explicitly stated.
-
-To output the graphs' adjacency matrix, call the executable with the
-argument "-a" and to output the graphs' edge list use the argument "-e".
 
 #### Adjacency matrix output
 

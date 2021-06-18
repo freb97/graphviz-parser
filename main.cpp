@@ -12,7 +12,7 @@
  *
  * @return The filled graph.
  */
-Graph parseInput()
+Graph* parseInput()
 {
     Graph* graph;
 
@@ -42,11 +42,18 @@ Graph parseInput()
         }
         else if (lineInput.length() >= 3) {
             if (!edgeInputMode && lineInput.length() >= 7) {
-                std::string name = lineInput.substr(2, 2);
-                std::string shape = lineInput.substr(0, 1) == "H" ? "box" : "circle";
+                std::string shape;
+                line >> shape;
+                shape = shape == "H" ? "box" : "circle";
 
-                float x = std::stoi(lineInput.substr(5, 1));
-                float y = std::stoi(lineInput.substr(7, 1));
+                std::string name;
+                line >> name;
+
+                float x;
+                line >> x;
+
+                float y;
+                line >> y;
 
                 Node* node = new Node(name, shape, x, y);
                 graph->addNode(*node);
@@ -63,7 +70,7 @@ Graph parseInput()
         }
     }
 
-    return *graph;
+    return graph;
 }
 
 /**
@@ -76,24 +83,36 @@ Graph parseInput()
  */
 int main(int argc, char** argv)
 {
-    Graph graph = parseInput();
+    Graph* graph = nullptr;
+
+    try {
+        graph = parseInput();
+    }
+    catch (const std::exception& exception) {
+        std::cout << "Invalid input given. Please try a different format." << std::endl;
+        std::cout << std::endl << "Error message: " << exception.what() << std::endl;
+    }
+
+    if (!graph) {
+        return EXIT_FAILURE;
+    }
 
     if (argc >= 2) {
         if (strcmp(argv[1], "-g") == 0) {
-            std::cout << graph.toString();
+            std::cout << graph->getGraphvizData();
         }
         else if (strcmp(argv[1], "-a") == 0) {
-            std::cout << graph.getAdjacencyMatrix();
+            std::cout << graph->getAdjacencyMatrix();
         }
         else if (strcmp(argv[1], "-e") == 0) {
-            std::cout << graph.getEdgeList();
+            std::cout << graph->getEdgeList();
         }
         else if (strcmp(argv[1], "-d") == 0) {
-            // @TODO: Implement dijkstra's algorithm and print output
+            std::cout << graph->getShortestPaths(0);
         }
     }
     else {
-        std::cout << graph.toString();
+        std::cout << graph->getGraphvizData();
     }
 
     std::cout << std::endl;

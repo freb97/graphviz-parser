@@ -1,6 +1,9 @@
 #include <array>
+#include <iomanip>
 #include <string>
 #include <sstream>
+
+#include <iostream>
 
 #include "graph.hpp"
 #include "node.hpp"
@@ -10,6 +13,10 @@
  */
 Graph::Graph(int size)
 {
+    if (size < 1) {
+        throw "Error: Graph size has to be bigger than 0.";
+    }
+
     initializeAdjacencyMatrix(size);
 }
 
@@ -77,21 +84,75 @@ int Graph::getNodeIndex(const Node& node)
 }
 
 /**
- * Gets a list of all nodes in the graph.
+ * Gets the shortest paths to each node from a given source node.
  *
- * @return The list of all nodes.
+ * @param source The node to start at.
+ *
+ * @return The shortest paths representation as a string.
  */
-const std::vector<Node>& Graph::getNodeList()
+std::string Graph::getShortestPaths(std::size_t source) const
 {
-    return this->nodes_;
+    constexpr float notConnected = std::numeric_limits<float>::infinity();
+    std::vector<float> distances(this->nodes_.size(), notConnected);
+    distances[source] = 0.0f;
+
+    const std::size_t noPredecessor = this->nodes_.size();
+    std::vector<std::size_t> predecessors(this->nodes_.size(), noPredecessor);
+
+    std::vector<bool> visited(this->nodes_.size(), false);
+    distances[source] = 0;
+
+    for (int i = 0; i < this->nodes_.size() - 1; i++) {
+        int closestNodeIndex = getClosestNode(distances, visited);
+        visited[closestNodeIndex] = true;
+
+        for (int ii = 0; ii < this->nodes_.size(); ii++) {
+            float closestNodeDistance = distances[closestNodeIndex];
+            float nodeConnected = this->adjacency_matrix_[closestNodeIndex][ii];
+
+            if (!visited[ii] && nodeConnected && closestNodeDistance != notConnected &&
+                closestNodeDistance + nodeConnected < distances[ii]) {
+                distances[ii] = closestNodeDistance + nodeConnected;
+                predecessors[ii] = closestNodeIndex;
+            }
+        }
+    }
+
+    std::stringstream output;
+
+    for (float distance : distances) {
+        output << std::setw(2);
+
+        if (distance != notConnected) {
+            output << distance << " ";
+        }
+        else {
+            output << "--" << " ";
+        }
+    }
+
+    output << std::endl << std::endl;
+
+    for (std::size_t predecessor : predecessors) {
+        output << std::setw(2);
+
+        if (predecessor != noPredecessor) {
+            output << predecessor << " ";
+        }
+        else {
+            output << "--" << " ";
+        }
+    }
+
+    return output.str();
 }
 
 /**
- * Converts the graph output to a string.
+ * Gets the graph output as graphviz compatible string.
  *
  * @return The graph output as string data.
  */
-std::string Graph::toString() const
+std::string Graph::getGraphvizData() const
 {
     std::stringstream output;
 
@@ -206,4 +267,26 @@ void Graph::initializeAdjacencyMatrix(int size)
 bool Graph::checkNodeIndex(int index)
 {
     return index >= 0 && index < this->nodes_.size();
+}
+
+/**
+ * Gets the closest node of all unvisited nodes.
+ *
+ * @param distances The distances to all nodes from the source node.
+ * @param visited The visited state of the nodes.
+ *
+ * @return The index of the next closest node.
+ */
+int Graph::getClosestNode(const std::vector<float>& distances, std::vector<bool> visited) const {
+    int min = std::numeric_limits<int>::max();
+    int min_index;
+
+    for (int i = 0; i < distances.size(); i++) {
+        if (visited[i] == 0 && distances[i] <= min) {
+            min = distances[i];
+            min_index = i;
+        }
+    }
+
+    return min_index;
 }

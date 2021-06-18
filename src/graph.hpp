@@ -13,8 +13,8 @@ class Graph {
         void connect(int indexA, int indexB);
         bool areConnected(int indexA, int indexB);
         int getNodeIndex(const Node& node);
-        const std::vector<Node>& getNodeList();
-        std::string toString() const;
+        std::string getShortestPaths(std::size_t source) const;
+        std::string getGraphvizData() const;
         std::string getAdjacencyMatrix();
         std::string getEdgeList() const;
 
@@ -24,6 +24,7 @@ class Graph {
 
         void initializeAdjacencyMatrix(int size);
         bool checkNodeIndex(int index);
+        int getClosestNode(const std::vector<float>& distances, std::vector<bool> visited) const;
 };
 
 #endif //GRAPHS_GRAPH_HPP
