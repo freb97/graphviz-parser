@@ -56,7 +56,10 @@ Graph* parseInput()
                 line >> y;
 
                 Node* node = new Node(name, shape, x, y);
-                graph->addNode(*node);
+
+                if (graph) {
+                    graph->addNode(*node);
+                }
             }
             else {
                 int nodeIndexA;
@@ -65,7 +68,9 @@ Graph* parseInput()
                 line >> nodeIndexA;
                 line >> nodeIndexB;
 
-                graph->connect(nodeIndexA, nodeIndexB);
+                if (graph) {
+                    graph->connect(nodeIndexA, nodeIndexB);
+                }
             }
         }
     }
