@@ -14,7 +14,7 @@
  */
 Graph* parseInput()
 {
-    Graph* graph;
+    Graph* graph = nullptr;
 
     std::stringstream output;
 
@@ -99,6 +99,7 @@ int main(int argc, char** argv)
     }
 
     if (!graph) {
+        std::cout << "Invalid input given. Please try a different format." << std::endl;
         return EXIT_FAILURE;
     }
 
