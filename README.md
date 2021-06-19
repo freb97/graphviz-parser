@@ -88,6 +88,10 @@ adjacency matrix data of the graph.
 
 Example:
 
+```./build/graphviz_parser -a```
+
+Input:
+
 3<br>
 H LL 1 0<br>
 L TO 1 1<br>
@@ -109,6 +113,10 @@ edge list data of the graph.
 
 Example:
 
+```./build/graphviz_parser -e```
+
+Input:
+
 3<br>
 H LL 1 0<br>
 L TO 1 1<br>
@@ -121,3 +129,31 @@ This will output the following data:
 
 [1] -- [2]<br>
 [1] -- [3]
+
+#### Shortest path output
+
+When given the argument -d, the program will output the
+shortest path from a given node to every other node.
+
+After the argument "-d", you can specify the node index at
+which the shortest path algorithm will start.
+
+Example:
+
+```./build/graphviz_parser -d 3```
+
+Input:
+
+3<br>
+H LL 1 0<br>
+L TO 1 1<br>
+H LP 0 2<br>
+E<br>
+0 1<br>
+2 0
+
+This will output the following data:
+
+&nbsp;1&nbsp;&nbsp;0&nbsp;&nbsp;2&nbsp;
+<br><br>
+&nbsp;1&nbsp;--&nbsp;&nbsp;0&nbsp;

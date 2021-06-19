@@ -3,8 +3,6 @@
 #include <string>
 #include <sstream>
 
-#include <iostream>
-
 #include "graph.hpp"
 #include "node.hpp"
 
@@ -92,6 +90,10 @@ int Graph::getNodeIndex(const Node& node)
  */
 std::string Graph::getShortestPaths(std::size_t source) const
 {
+    if (source >= this->nodes_.size()) {
+        return "Error: Source node index out of bounds.";
+    }
+
     constexpr float notConnected = std::numeric_limits<float>::infinity();
     std::vector<float> distances(this->nodes_.size(), notConnected);
     distances[source] = 0.0f;
