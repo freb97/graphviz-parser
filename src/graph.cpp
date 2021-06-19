@@ -202,7 +202,7 @@ std::string Graph::getAdjacencyMatrix()
             output << value;
 
             if (ii == size - 1) {
-                output << std::endl;
+                output << " " << std::endl;
             }
             else {
                 output << " ";
