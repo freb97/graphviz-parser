@@ -290,5 +290,9 @@ int Graph::getClosestNode(const std::vector<float>& distances, std::vector<bool>
         }
     }
 
+    if (min_index >= distances.size()) {
+        min_index = distances.size() - 1;
+    }
+
     return min_index;
 }

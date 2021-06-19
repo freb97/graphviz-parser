@@ -107,8 +107,12 @@ int main(int argc, char** argv)
         else if (strcmp(argv[1], "-e") == 0) {
             std::cout << graph->getEdgeList();
         }
-        else if (strcmp(argv[1], "-d") == 0 && argc >= 3) {
-            int startNodeIndex = std::stoi(argv[2]);
+        else if (strcmp(argv[1], "-d") == 0) {
+            int startNodeIndex = 0;
+
+            if (argc >= 3) {
+                startNodeIndex = std::stoi(argv[2]);
+            }
 
             std::cout << graph->getShortestPaths(startNodeIndex);
         }

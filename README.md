@@ -136,7 +136,8 @@ When given the argument -d, the program will output the
 shortest path from a given node to every other node.
 
 After the argument "-d", you can specify the node index at
-which the shortest path algorithm will start.
+which the shortest path algorithm will start, if no node index
+specified, the algorithm will start at 0.
 
 Example:
 
