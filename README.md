@@ -141,7 +141,7 @@ specified, the algorithm will start at 0.
 
 Example:
 
-```./build/graphviz_parser -d 3```
+```./build/graphviz_parser -d 1```
 
 Input:
 
