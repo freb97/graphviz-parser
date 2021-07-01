@@ -3,6 +3,7 @@
 #include <cstring>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
 
 #include "src/node.hpp"
 #include "src/graph.hpp"
@@ -93,7 +94,7 @@ int main(int argc, char** argv)
     try {
         graph = parseInput();
     }
-    catch (const std::exception& exception) {
+    catch (std::runtime_error exception) {
         std::cout << "Invalid input given. Please try a different format." << std::endl;
         std::cout << std::endl << "Error message: " << exception.what() << std::endl;
     }

@@ -3,6 +3,7 @@
 #include <limits>
 #include <string>
 #include <sstream>
+#include <stdexcept>
 
 #include "graph.hpp"
 #include "node.hpp"
@@ -13,7 +14,7 @@
 Graph::Graph(int size)
 {
     if (size < 1) {
-        throw "Error: Graph size has to be bigger than 0.";
+        throw std::runtime_error("Error: Graph size has to be bigger than 0.");
     }
 
     initializeAdjacencyMatrix(size);
@@ -92,7 +93,7 @@ int Graph::getNodeIndex(const Node& node)
 std::string Graph::getShortestPaths(std::size_t source) const
 {
     if (source >= this->nodes_.size()) {
-        return "Error: Source node index out of bounds.";
+        throw std::runtime_error("Error: Source node index out of bounds.");
     }
 
     constexpr float notConnected = std::numeric_limits<float>::infinity();
