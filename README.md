@@ -6,9 +6,13 @@ A rudimentary parser for graphviz output.
 
 ### CMake
 
+Navigate to the build directory
+
+`cd ./build`
+
 Create the project cmake files
 
-`cmake .`
+`cmake ..`
 
 Build the executable(s)
 
@@ -18,9 +22,13 @@ Build the executable(s)
 
 ### Graphs
 
+Navigate to the build directory
+
+`cd ./build`
+
 Run the parser
 
-`./build/graphviz_parser`
+`./bin/graphviz_parser`
 
 ## Usage
 

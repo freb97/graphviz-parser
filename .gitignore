@@ -7,8 +7,8 @@
 /Testing/
 /cmake-build-*/
 /CMakeFiles/
-/build/
-/bin/
+/build/**/*
+/build/*
 /coverage/
 
 # Files
