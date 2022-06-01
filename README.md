@@ -96,7 +96,7 @@ adjacency matrix data of the graph.
 
 Example:
 
-```./build/graphviz_parser -a```
+```./bin/graphviz_parser -a```
 
 Input:
 
@@ -121,7 +121,7 @@ edge list data of the graph.
 
 Example:
 
-```./build/graphviz_parser -e```
+```./bin/graphviz_parser -e```
 
 Input:
 
@@ -149,7 +149,7 @@ specified, the algorithm will start at 0.
 
 Example:
 
-```./build/graphviz_parser -d 1```
+```./bin/graphviz_parser -d 1```
 
 Input:
 
