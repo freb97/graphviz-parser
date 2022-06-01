@@ -8,15 +8,23 @@ A rudimentary parser for graphviz output.
 
 Navigate to the build directory
 
-`cd ./build`
+```cd ./build```
 
 Create the project cmake files
 
-`cmake ..`
+```cmake ..```
 
 Build the executable(s)
 
 `make` (or `cmake --build .`)
+
+#### Known issues
+
+Some Windows computers will not be able to run the cmake
+command without specifying a generator, in most cases it
+works with the `-G "MinGW Makefiles"` flag:
+
+```cmake .. -G "MinGW Makefiles"```
 
 ## Run
 
@@ -24,11 +32,11 @@ Build the executable(s)
 
 Navigate to the build directory
 
-`cd ./build`
+```cd ./build```
 
 Run the parser
 
-`./bin/graphviz_parser`
+```./bin/graphviz_parser```
 
 ## Usage
 
